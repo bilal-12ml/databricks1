@@ -1,0 +1,2 @@
+from pyspark.sql.functions import year,month,dayofyear
+display(df.select(year(col('Time')).alias('year'),month(col('Time')).alias('month'),dayofyear(col('Time')).alias('day of year')))
