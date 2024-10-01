@@ -1,0 +1,3 @@
+filepath="dbfs:/FileStore/ActivityLog01.parquet"
+df=spark.read.load(filepath,format="parquet")
+display(df)
