@@ -1,0 +1,15 @@
+filepath="abfss://data@datalakeml12.dfs.core.windows.net/csv/"
+
+spark.conf.set(
+    "fs.azure.account.key.datalakeml12.dfs.core.windows.net",
+   
+)
+
+checkpoint="/temp/checkpoint"          ////////////////This line indicates the directory where Spark will save checkpoint data.
+                                                       Checkpointing is a mechanism to save the state of a streaming application or a long-running job. It helps to recover from failures and ensures fault tolerance by storing intermediate results.        
+
+schemalocation="/temp/schema" ////////////////This line specifies the directory for storing the schema information of the data being processed.
+                                               In scenarios like reading/writing structured data (e.g., using Delta Lake), having a schema location helps maintain consistency and allows for easier management of the data structure.
+
+rawdf=spark.readStream.format("cloudFiles").option("cloudFiles.format", "csv").option("cloudFiles.schemalocation",schemalocation).load(filepath)
+display(rawdf)
